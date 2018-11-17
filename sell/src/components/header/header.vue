@@ -39,7 +39,6 @@
             <div class="detail-wrapper clearfix">
                 <div class="detail-main">
                     <h1 class="name">{{seller.name}}</h1>
-<<<<<<< HEAD
                     <!-- 注册star组件后，可以在DOM里使用star标签 -->
                     <!-- :size和:score为传到star组件的参数，计算itemClasses用到，在star里用props接收 -->
                     <!--  :score="3.6" 则显示3颗半星，根据seller.score变化而改变，size可以收到修改为 36/24/48（这里使用48图）-->
@@ -54,8 +53,6 @@
                         <div class="text">优惠信息</div>
                         <div class="line"></div>
                     </div>
-=======
->>>>>>> 8c7e999b82a1a92055205cf341aac403ccab6300
                 </div>
             </div>
             <div class="detail-close">
@@ -66,11 +63,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-<<<<<<< HEAD
   import star from 'components/star/star'; // 引入star组件
 
-=======
->>>>>>> 8c7e999b82a1a92055205cf341aac403ccab6300
   export default{
       props: { // 通过props接收传过来的seller对象，从App.vue里
           seller: {
@@ -89,12 +83,9 @@
       },
       created() {
           this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
-<<<<<<< HEAD
       },
       components: { // 注册组件，star作为header的子组件
           star // 引入star文件后，要注册组件才能用
-=======
->>>>>>> 8c7e999b82a1a92055205cf341aac403ccab6300
       }
   };
 </script>
@@ -234,7 +225,6 @@
                   text-align center
                   font-size 16px
                   font-weight 700
-<<<<<<< HEAD
                 .star-wrapper
                   margin-top 18px
                   padding 2px 0
@@ -251,8 +241,6 @@
                   .text
                     padding 0 12px
                     font-size 14px
-=======
->>>>>>> 8c7e999b82a1a92055205cf341aac403ccab6300
         .detail-close
             position relative
             width 32px
