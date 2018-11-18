@@ -1,0 +1,19 @@
+// 添加一些默认样式
+body, html
+  line-height 1
+  font-weight: 200
+  font-family: 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif // 设置默认字体，从前往后找
+
+// 定义全局样式
+@media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5) // 针对最小dpi为1.5的手机做对应缩放
+  .border-1px
+      &::after
+          -webkit-transform: scaleY(0.7) // y轴上的scale为0.7（0.7 * 1.5 约= 1）
+          transform: scaleY(0.7)
+
+@media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2) // 针对最小dpi为1.5的手机做对应缩放
+  .border-1px
+      &::after
+          -webkit-transform: scaleY(0.5) // y轴上的scale为0.7（0.7 * 1.5 约= 1）
+          transform: scaleY(0.5) // dpi 为2 则缩放 0.5倍
+

@@ -53,6 +53,19 @@
                         <div class="text">优惠信息</div>
                         <div class="line"></div>
                     </div>
+                    <!-- 优惠信息下的supports列表:减、折、折、特、特，v-if先判断有没有，用ul、li列表语义化 -->
+                    <ul v-if="seller.supports" class="supports">
+                        <!-- v-for遍历supports，supports是一个数组， item为遍历数组supports里的值-->
+                        <!-- 标签li 里的v-for根据item遍历，有多少个item就会有多少个li标签，如：item为5，则有5个<li></li>标签，有5个<li></li>添加到<ul></ul>里-->
+                        <li class="support-item" v-for="item in seller.supports">
+                            <!--classMap[]根据type的值（data.json里的，可以是1、2、3、等）  -->
+                            <!-- $index为v-for遍历对应的item在数组supports里的下标，和动态添加的span标签对应（第3个span标签的$index为3），取出对应的type -->
+                            <!-- 根据type的值（1/2/3），动态添加类decrease、discount到:class里，在css里写对应样式，显示不同图片 -->
+                            <span class="icon" :class="classMap[seller.supports[$index].type]"></span>
+                            <!-- 获取文字，文本内容放到{{}}里（小胡子语法/双大括弧） -->
+                            <span class="text">{{seller.supports[$index].description}}</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="detail-close">
@@ -81,7 +94,7 @@
               this.detailShow = true; // DOM跟着数据改变而改变
           }
       },
-      created() {
+      created() { // classMap是一个数组，classMap[0]='decrease',2、classMap[1]='discount'
           this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
       },
       components: { // 注册组件，star作为header的子组件
@@ -232,7 +245,7 @@
                 .title // Postcss工具根据can i use 官网写的代码，比自己写mixin更加方便
                   display flex // vue.js在编译时候会用到 Postcss工具，解决flex的兼容性问题，自定添加兼容性代码
                   width 80% // 相对于屏幕宽度的80%，不写死，宽度自适应布局
-                  margin 30px auto 24px auto // 左右auto居中
+                  margin 28px auto 24px auto // 左右auto居中
                   .line
                     flex 1 // line横线需要等分 flex为 1
                     position relative
@@ -240,7 +253,39 @@
                     border-bottom 1px solid rgba(255, 255, 255, 0.2)
                   .text
                     padding 0 12px
+                    font-weight 700
                     font-size 14px
+                .supports // 图片用2×32px的
+                  width 80% // 宽度和title一样80%，宽度自适应，左右auto
+                  margin 0 auto // auto水平居中
+                  .support-item
+                    padding 0 12px
+                    margin-bottom 12px
+                    font-size 0 // 消除边距，在.text设置font-size
+                    &.last-child // 最后一个li没有下边距
+                      margin-bottom 0
+                    .icon // 左侧小图标
+                      display inline-block
+                      width 16px
+                      height 16px
+                      vertical-align top
+                      margin-right 6px
+                      background-size 16px 16px
+                      background-repeat no-repeat
+                      &.decrease // 添加图片,添加的类不同，样式就会不同，添加的图片也会不同
+                        bg-image('decrease_2') // bg-image()是mixin.styl里的函数，css预处理语言stylus，类似less/sass
+                      &.discount // 根据不同的类，动态添加不同图片（5种）
+                        bg-image('discount_2')
+                      &.special
+                        bg-image('special_2')
+                      &.invoice
+                        bg-image('invoice_2')
+                      &.guarantee
+                        bg-image('guarantee_2')
+                    .text
+                      // line-height 12px
+                      line-height 16px // 和icon的line-height一样，看起来会是垂直居中的
+                      font-size 12px
         .detail-close
             position relative
             width 32px
