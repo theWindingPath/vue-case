@@ -20,6 +20,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     // 增加自定义配置 semi 允许有分号，es6默认：有分号；会报错
     'semi': ['error', 'always'], // 配置为没有分号会报错
-    'indent': 0 // 忽略indent配置
+    'indent': 0,
+    'space-before-function-paren': 0
   }
 }
