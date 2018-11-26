@@ -9,11 +9,6 @@ border-1px($color) // 定义一个函数border-1px，参数$color
       border-top: 1px solid $color
       content: ' ' // 空的字符串
 
-// 一像素边框关掉
-border-none()
-  &:after
-    display none
-
 // 写一个兼容2×、3×图片函数
 bg-image($url)
   background-image: url($url + "@2x.png") // 普通的用2×图
