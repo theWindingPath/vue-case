@@ -45,7 +45,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import BScroll from 'better-scroll'; // 引入第三方插件better-scroll,重命名为BScroll
+  import BScroll from 'better-scroll';
 
   const ERR_OK = 0;
 
@@ -77,9 +77,9 @@
     },
     methods: { // methods是一个object，不是方法
       _initScroll() { // 初始化BScroll
-        // BScroll( , ) 接收两个参数，第一个是DOM节点，第二个是options对象
+        // BScroll() 接收两个参数，第一个是DOM节点，第二个是options对象
         // options可以先不传（传空对象{}）
-        this.menuScroll = new BScroll(this.$els.menuWrapper, {}); // 创建new要滚动的对象
+        this.menuScroll = new BScroll(this.$els.menuWrapper, {}); // 获取要滚动的对象
 
         this.foodsScroll = new BScroll(this.$els.foodsWrapper, {});
       }

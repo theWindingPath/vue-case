@@ -1,0 +1,23 @@
+border-1px($color) // 定义一个函数border-1px，参数$color
+  position relative
+  &:after // 伪类，上边框一像素可以用before伪类
+      display : block
+      position: absolute
+      left: 0
+      bottom: 0 // bottom定位在下，top定位在上（上边框）
+      width: 100%
+      border-top: 1px solid $color
+      content: ' ' // 空的字符串
+
+// 一像素边框关掉
+border-none()
+  &:after
+    display none
+
+// 写一个兼容2×、3×图片函数
+bg-image($url)
+  background-image: url($url + "@2x.png") // 普通的用2×图
+  // 兼容最小dpi为3的设备，
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
+    background-image: url($url + "@3x.png") // 用3×图
+
