@@ -23,7 +23,7 @@
                 <div class="icon">
                   <img :src="food.icon">
                 </div>
-                <div>
+                <div class="content">
                   <h2 class="name">{{food.name}}</h2>
                   <p class="desc">{{food.description}}</p>
                   <div class="extra">

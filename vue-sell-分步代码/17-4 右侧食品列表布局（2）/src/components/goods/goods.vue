@@ -129,7 +129,7 @@
         background #f3f5f7
       .food-item
         display flex
-        margin 18px
+        margin 18px // 上下margin会重合，不会叠加成36px
         padding-bottom 18px
         border-1px(rgba(7,17,27,0.1))
         &:last-child

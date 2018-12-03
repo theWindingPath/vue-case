@@ -1,7 +1,7 @@
 <template>
     <div class="goods">
-      <!-- vue里用v-el获取DOM节点，用-不能用驼峰，大小写敏感的 -->
-      <!-- 在下面就可以用this.$els.menuWrapper获取（这里用驼峰） -->
+      <!-- vue(template)里用v-el获取DOM节点，用-不能用驼峰，大小写敏感的 -->
+      <!-- 在下面(script)就可以用this.$els.menuWrapper获取（这里用驼峰） -->
       <div class="menu-wrapper" v-el:menu-wrapper>
         <ul>
           <!-- v-for遍历，goods是数组，有多少个元素，则添加多少个li标签，和goods.length(数组长度)对应 -->

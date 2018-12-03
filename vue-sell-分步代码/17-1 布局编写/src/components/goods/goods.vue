@@ -1,5 +1,6 @@
 <template>
     <div class="goods">
+      <!-- 两栏布局 -->
       <div class="menu-wrapper"></div>
       <div class="foods-wrapper"></div>
     </div>
@@ -38,7 +39,7 @@
     top 174px // header 134px 加 tab 40px来的
     bottom 46px // 底部footer高度46px
     width 100%
-    overflow hidden //超出隐藏
+    overflow hidden //超出隐藏，内容超出手机高度
     .menu-wrapper // 左侧固定80px
       flex: 0 0 80px // flex三个属性：第一个：等分，第二个：内容不足缩放情况，第三个：占位，这里占80px，
       width 80px // Android浏览器兼容性问题，需要设置width

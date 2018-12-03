@@ -16,7 +16,7 @@
       <div class="foods-wrapper" v-el:foods-wrapper>
         <ul>
           <!-- 和上面menu-wrapper里的li一样，先取得goods下的name -->
-          <!-- food-list-hook方便我们拿到DOM节点,hook表面它被js选择的样式（编程小技巧） -->
+          <!-- food-list-hook方便我们拿到DOM节点,hook表示它是被js选择的样式（编程小技巧） -->
           <li v-for="item in goods" class="food-list food-list-hook">
             <h1 class="title">{{item.name}}</h1>
             <ul>
@@ -103,7 +103,7 @@
           probeType: 3 // 传这个属性给better-scroll，告诉bscroll实时给我们返回滚动的高度,probe(探针效果)
         });
         // 通过foodsScroll对象，实时监听事件（scroll）,回调函数参数pos,通过pos实时获得滚动的位置
-        this.foodsScroll.on('sroll', (pos) => {
+        this.foodsScroll.on('scroll', (pos) => {
           // 用data里定义的scrollY，来接收pos.y（滚动高度）,pos.y是小数，需要转换
           // Math.roud(pos.y) 将pos.y（负值小数）转换为整数,Math.abs()取绝对值，希望它是正值整数
           this.scrollY = Math.abs(Math.round(pos.y)); // 然后，用实时获得的scrollY，和右边的列表高度区间对应的，左边的标题栏映射
