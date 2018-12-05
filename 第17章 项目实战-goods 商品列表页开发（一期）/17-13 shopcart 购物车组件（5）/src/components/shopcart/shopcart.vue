@@ -13,9 +13,8 @@
                 <div class="desc">另需配送费￥{{deliveryPrice}}元</div>
             </div>
             <div class="content-right">
-                <!-- 动态改变右边结算状态 -->
-                <div class="pay" :class="payClass">
-                    {{payDesc}}
+                <div class="pay">
+                    ￥{{minPrice}}起送
                 </div>
             </div>
         </div>
@@ -30,12 +29,12 @@
               default() { // 在vue里props下，如果是数组Array，需要用default
                   return [ // 返回一个数组，利用从父组件（goods）传过来的数据，
                       { // 数组selectFoods里每个元素[ , ]是对象{},即selectFoods=[{}, {}, {}],每个元素{}有很多属性name、price、oldPrice、description等
-                          price: 12, // price默认值为10，实质值为foods[i].price
-                          count: 2 // 新增加的自定义属性count,data.json里没有的，用户点击加号+，计算出来的，购买商品个数(在父组件goods.vue里计算好后传进来的)
+                          price: 10, // price默认值为10，实质值为foods[i].price
+                          count: 1 // 新增加的自定义属性count,data.json里没有的，用户点击加号+，计算出来的，购买商品个数(在父组件goods.vue里计算好后传进来的)
                       },
                       {
                           price: 10,
-                          count: 0
+                          count: 2
                       }
                   ];
               }
@@ -63,24 +62,6 @@
                 count += food.count;
             });
             return count;
-        },
-        payDesc() { // 三种状态
-            if (this.totalPrice === 0) { // 总价为0
-                // `${}` ES6语法，代替+字符串拼接
-                return `￥${this.minPrice} 起送`;
-            } else if (this.totalPrice < this.minPrice) { // 加个介于0 ~ 20之间
-                let priceChajia = this.minPrice - this.totalPrice; // 显示差价
-                return `还差￥${priceChajia} 起送`;
-            } else { // 满20元
-                return '去结算';
-            }
-        },
-        payClass() { // 动态添加样式，结算状态变绿色
-            if (this.totalPrice > this.minPrice) { // 总价大于20
-                return 'enough';
-            } else { // 总价小于20
-                return 'not-enough';
-            }
         }
       }
   };
@@ -169,11 +150,9 @@
                 text-align center
                 font-size 12px
                 font-weight 700
-                // background-color #2b333b
-                &.not-enough
-                  background-color #2b333b
-                &.enough
-                  background-color #00b43c
-                  color #fff
+                background-color #2b333b
+
+
+
 
 </style>
