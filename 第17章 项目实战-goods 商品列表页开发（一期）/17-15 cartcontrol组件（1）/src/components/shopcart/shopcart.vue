@@ -3,16 +3,19 @@
         <div class="content">
             <div class="content-left">
                 <div class="logo-wrapper">
-                    <div class="logo">
-                        <i class="icon-shopping_cart"></i>
+                    <!-- 动态添加highLight（高亮） -->
+                    <div class="logo" :class="{'highLight': totalCount>0}">
+                        <i class="icon-shopping_cart" :class="{'highLight': totalCount>0}"></i>
                     </div>
+                    <div class="num" v-show="totalCount>0">{{totalCount}}</div>
                 </div>
-                <div class="price">￥{{totalPrice}} / {{totalCount}}个</div>
+                <div class="price" :class="{'highLight': totalPrice>0}">￥{{totalPrice}}</div>
                 <div class="desc">另需配送费￥{{deliveryPrice}}元</div>
             </div>
             <div class="content-right">
-                <div class="pay">
-                    ￥{{minPrice}}起送
+                <!-- 动态改变右边结算状态 -->
+                <div class="pay" :class="payClass">
+                    {{payDesc}}
                 </div>
             </div>
         </div>
@@ -24,15 +27,15 @@
       props: { // 通过props接收父组件（goods.vue）传过来的数组
           selectFoods: { // selectFoods和数据里goods里的foods数组对应
               type: Array,
-              default() { // 在vue里props下，如果是数组Array，需要用default()函数
+              default() { // 在vue里props下，如果是数组Array，需要用default
                   return [ // 返回一个数组，利用从父组件（goods）传过来的数据，
                       { // 数组selectFoods里每个元素[ , ]是对象{},即selectFoods=[{}, {}, {}],每个元素{}有很多属性name、price、oldPrice、description等
-                          price: 10, // price默认值为10，实质值为foods[i].price
-                          count: 1 // 新增加的自定义属性count,data.json里没有的，用户点击加号+，计算出来的，购买商品个数(在父组件goods.vue里计算好后传进来的)
+                          price: 12, // price默认值为10，实质值为foods[i].price
+                          count: 2 // 新增加的自定义属性count,data.json里没有的，用户点击加号+，计算出来的，购买商品个数(在父组件goods.vue里计算好后传进来的)
                       },
                       {
-                          price: 20,
-                          count: 2
+                          price: 10,
+                          count: 0
                       }
                   ];
               }
@@ -60,6 +63,24 @@
                 count += food.count;
             });
             return count;
+        },
+        payDesc() { // 三种状态
+            if (this.totalPrice === 0) { // 总价为0
+                // `${}` ES6语法，代替+字符串拼接
+                return `￥${this.minPrice} 起送`;
+            } else if (this.totalPrice < this.minPrice) { // 加个介于0 ~ 20之间
+                let priceChajia = this.minPrice - this.totalPrice; // 显示差价
+                return `还差￥${priceChajia} 起送`;
+            } else { // 满20元
+                return '去结算';
+            }
+        },
+        payClass() { // 动态添加样式，结算状态变绿色
+            if (this.totalPrice > this.minPrice) { // 总价大于20
+                return 'enough';
+            } else { // 总价小于20
+                return 'not-enough';
+            }
         }
       }
   };
@@ -99,10 +120,28 @@
                     text-align center
                     border-radius 50%
                     background #2b343c
+                    &.highLight // 动态高亮
+                      background-color rgb(0, 160, 220)
                     .icon-shopping_cart
                         line-height 44px
                         font-size 24px
                         color #80858a
+                        &.highLight
+                          color #fff
+                  .num
+                    position absolute
+                    top 0
+                    right 0
+                    width 24px
+                    height 16px
+                    line-height 16px
+                    text-align center
+                    border-radius 16px
+                    font-size 9px
+                    font-weight 700
+                    color #fff
+                    background-color rgb(240, 20, 20)
+                    box-shadow 0 4px 8px 0 rgba(0, 0, 0, 0.4)
               .price
                   display inline-block
                   vertical-align top
@@ -113,6 +152,8 @@
                   border-right 1px solid rgba(255, 255, 255, 0.1)
                   font-size 16px
                   font-weight 700
+                  &.highLight
+                    color #fff
               .desc
                   display inline-block
                   vertical-align top
@@ -128,9 +169,11 @@
                 text-align center
                 font-size 12px
                 font-weight 700
-                background-color #2b333b
-
-
-
+                // background-color #2b333b
+                &.not-enough
+                  background-color #2b333b
+                &.enough
+                  background-color #00b43c
+                  color #fff
 
 </style>
