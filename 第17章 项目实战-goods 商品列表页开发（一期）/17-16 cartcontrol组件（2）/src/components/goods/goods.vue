@@ -51,7 +51,7 @@
       </div>
       <!-- 注册后，在模板里使用组件 -->
       <!-- 通过props属性，向子组件（shopcart）传数据 -->
-      <shopcart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+      <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
     </div>
 </template>
 
@@ -89,19 +89,6 @@
           // console.log(i); // 可以打印输出
         }
         return 0; // 什么都没有返回0
-      },
-      selectFoods() { // 变量goods获得每个food（对象）,放到数组里返回
-        let foods = []; // 定义一个空数组
-        // 通过两层遍历，找到所有被选择的商品foods
-        this.goods.forEach((good) => { // goods下的每个good（对象{}）
-          good.foods.forEach((food) => { // 遍历good下的foods(数组[])
-            // food.count在cartcontrol组件里set()的,
-            if (food.count) { // 如果点击count存在（说明这个商品被点击选过）
-              foods.push(food); // 将有count的food放到数组里
-            }
-          });
-        });
-        return foods; // 返回数组
       }
     },
     created() { // 在created钩子函数里获取数据

@@ -29,14 +29,14 @@
               type: Array,
               default() { // 在vue里props下，如果是数组Array，需要用default
                   return [ // 返回一个数组，利用从父组件（goods）传过来的数据，
-                    //   { // 数组selectFoods里每个元素[ , ]是对象{},即selectFoods=[{}, {}, {}],每个元素{}有很多属性name、price、oldPrice、description等
-                    //       price: 12, // price默认值为10，实质值为foods[i].price
-                    //       count: 2 // 新增加的自定义属性count,data.json里没有的，用户点击加号+，计算出来的，购买商品个数(在父组件goods.vue里计算好后传进来的)
-                    //   },
-                    //   {
-                    //       price: 10,
-                    //       count: 0
-                    //   }
+                      { // 数组selectFoods里每个元素[ , ]是对象{},即selectFoods=[{}, {}, {}],每个元素{}有很多属性name、price、oldPrice、description等
+                          price: 12, // price默认值为10，实质值为foods[i].price
+                          count: 2 // 新增加的自定义属性count,data.json里没有的，用户点击加号+，计算出来的，购买商品个数(在父组件goods.vue里计算好后传进来的)
+                      },
+                      {
+                          price: 10,
+                          count: 0
+                      }
                   ];
               }
           },

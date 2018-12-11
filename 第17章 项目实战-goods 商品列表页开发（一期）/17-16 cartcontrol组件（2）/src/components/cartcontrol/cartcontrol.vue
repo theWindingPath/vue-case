@@ -1,9 +1,8 @@
 <template>
   <div class="cartcontrol">
       <!-- food.count大于0才显示，添加点击事件@click -->
-      <!-- 平移动画：inner/move(transition/transform/translate3d()/rotate()) -->
-      <div class="cart-decrease" v-show="food.count>0" @click="descreaseCart" transition="move">
-          <span class="inner icon-remove_circle_outline"></span>
+      <div class="cart-decrease" v-show="food.count>0" @click="descreaseCart">
+          <span class="icon-remove_circle_outline"></span>
       </div>
       <div class="cart-count" v-show="food.count>0">{{food.count}}</div>
       <div class="cart-add icon-add_circle" @click="addCart">
@@ -27,7 +26,7 @@
           if (!event._constructed) { // 不是自己派发的，直接return
             return;
           }
-          // console.log('click'); // 测试
+          console.log('click'); // 测试
           if (!this.food.count) { // 如果food.count为undefined
             // this.food.count = 1; // 初始化count，在vue里新增属性，需要用到set()接口
             Vue.set(this.food, 'count', 1); // 给this.food添加count属性，同时赋值为1；
@@ -54,25 +53,9 @@
     .cart-decrease
       display inline-block
       padding 6px
-      // line-height 24px
-      // font-size 24px
-      // color rgb(0, 160, 220)
-      transition all 0.5s linear // 线性缓动
-      &.move-transition
-        opacity 1
-        transform translate3d(0, 0, 0) // 动画平移属性(x, y, z轴)，最终在当前位置
-        .inner // inner 要在move-transition下
-          display inline-block // 有宽高动画才能做起来
-          line-height 24px
-          font-size 24px
-          color rgb(0, 160, 220)
-          transition all 0.5s linear
-          transform rotate(0)
-      &.move-enter, &.move-leave
-        opacity 0
-        transform translate3d(24px, 0, 0) // 最初位置设在距离x轴右边的24px处
-        .inner
-          transform rotate(180deg) // 内层滚动180度
+      line-height 24px
+      font-size 24px
+      color rgb(0, 160, 220)
     .cart-count
       display inline-block
       vertical-align top
