@@ -125,13 +125,15 @@
                 ball.show = true; // ball.show从false设置为true
                 ball.el = el; // 计算小球运动位置，需要dom(现在el为加号+的dom节点)
                 this.dropBalls.push(ball); // 将处理后的小球ball放入dropBall
-                // console.log(this.dropBalls); // 最多拿到4个小球
+                console.log(this.balls);
+                console.log(this.dropBalls); // 最多拿到4个小球
                 // console.log(ball); // 因为有return，里面的console.log每次都打印一次
                 return; // 获取一个false值小球后，设为true并将dom节点放入后，立即return，退出for循环了，每次只操作一次balls数组里的一个show为false的小球
               }
               // console.log(ball); // ball对象现在el属性
             }
             // console.log(ball); // 这里访问不了for里面的ball（undefined）
+            // console.log(this.balls);
             // console.log(this.dropBall); // 上面return了，函数不会执行到这里，打印不出来
           }
       },
@@ -154,14 +156,14 @@
                       // console.log(y);
                       el.style.display = ''; // 在设置动画初始位置前，将小球手动设置display为空，v-show设置display为none，这里设置为空''，将小球显示出来
                       // 动画执行前beforeEnter()，将小球移到点击加号的位置，用translate3d()
-                      el.style.webkitTransiform = `translate3d(0,${y}px,0)`;
+                      el.style.webkitTransform = `translate3d(0,${y}px,0)`;
                       el.style.transform = `translate3d(0,${y}px,0)`; // 外层元素做纵向变化
                       // console.log(el);
                       // console.log(el.style.transform);
                       // console.log(el.style.display);
                       let inner = el.getElementsByClassName('inner-hook')[0]; // 原生方法获取内层dom节点inner
                       // console.log(inner);
-                      inner.style.webkitTransiform = `translate3d(${x}px,0,0)`; // 内层元素做x轴偏移
+                      inner.style.webkitTransform = `translate3d(${x}px,0,0)`; // 内层元素做x轴偏移
                       inner.style.transform = `translate3d(${x}px,0,0)`;
                     }
                 }

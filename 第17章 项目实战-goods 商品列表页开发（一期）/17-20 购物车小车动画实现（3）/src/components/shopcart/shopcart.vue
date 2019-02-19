@@ -169,7 +169,7 @@
               enter(el) { // 每个钩子函数都接收一个参数el（需要执行动画的dom对象）,通过el可以访问到上面的<div transition="drop"></div>这个dom节点
                 // 动画开始前，手动触发浏览器重绘// rf定义后没有使用，需要加eslint注释
                 /* eslint-disable no-unused-vars */
-                let rf = el.offsetHeight;
+                let rf = el.offsetHeight; // 获取布局信息（offsetHeight）会触发浏览器重排、重绘
                 // DOM 还没有更新
                 this.$nextTick(() => { // 用到$nextTcik这个接口，在下一次 event loop做什么事情，
                   // DOM 更新了，下面是DOM更新后要做事情,将样式重置回来
@@ -182,11 +182,11 @@
               },
               afterEnter(el) {
                   // 取出dropBalls数组里的第一个元素
-                  let ball = this.dropBalls.shift(); // dropBalls数组长度减一，会改变原来数组，数组第一个元素减少
+                  let ball = this.dropBalls.shift(); // dropBalls数组长度减一，会改变原来数组，数组第一个元素减少，这里不会改变this.balls数组，数组是引用类型，指向不同作用域，但是数组里的元素是指向一个对象的引用地址，
                   // console.log(this.dropBalls);
                   // console.log(ball);
                   if (ball) { // 如果取出的ball.show为true
-                    ball.show = false;
+                    ball.show = false; // ball指向this.balls里的元素对象，这是使得this.balls[i].show = false
                     el.style.display = 'none'; // dom节点设置display为none时，v-show会响应到，设置ball.show会设为false
                   }
                 //   console.log(this.balls);
